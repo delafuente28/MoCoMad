@@ -29,6 +29,13 @@ namespace MoCoMad.Controllers
             return View();
         }
 
+        public IActionResult Map()
+        {
+            ViewData["Message"] = "Google Maps.";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
