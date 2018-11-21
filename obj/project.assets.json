@@ -2773,6 +2773,18 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
+      "NSoupCore/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.2"
+        },
+        "compile": {
+          "lib/netcoreapp1.1/NSoup.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.1/NSoup.dll": {}
+        }
+      },
       "NuGet.Frameworks/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -7505,6 +7517,16 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
+    "NSoupCore/1.0.0": {
+      "sha512": "fthJUa/Ocsr0+sTKLsKg+mnlhVJZZOau9Rqnw+saz5Jtdd0tYffVyN2BYD/z/Lr4uRCiFUjqsSVGO/IZVWhQnQ==",
+      "type": "package",
+      "path": "nsoupcore/1.0.0",
+      "files": [
+        "lib/netcoreapp1.1/NSoup.dll",
+        "nsoupcore.1.0.0.nupkg.sha512",
+        "nsoupcore.nuspec"
+      ]
+    },
     "NuGet.Frameworks/4.7.0": {
       "sha512": "/VaEPsEgj3p5YPLLxbYc6rB8gYIPf+8wCWOAlAe3l/SP0DXcefZ58uJer1ToBKIpwbPN5LkgTXtvilze5UJoYQ==",
       "type": "package",
@@ -12215,7 +12237,8 @@
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
+      "NSoupCore >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12278,6 +12301,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "NSoupCore": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

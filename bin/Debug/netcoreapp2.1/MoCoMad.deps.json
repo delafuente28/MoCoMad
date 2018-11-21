@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "1f5da74c73bcd40a876f54e3c32d49fdb295924e"
+    "signature": "e016b69d4fc44092bfe71df2640b18cbf74778ba"
   },
   "compilationOptions": {
     "defines": [
@@ -27,7 +27,8 @@
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
+          "NSoupCore": "1.0.0"
         },
         "runtime": {
           "MoCoMad.dll": {}
@@ -361,6 +362,20 @@
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
+        }
+      },
+      "NSoupCore/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.1.0"
+        },
+        "runtime": {
+          "lib/netcoreapp1.1/NSoup.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp1.1/NSoup.dll": {}
         }
       },
       "NuGet.Frameworks/4.7.0": {
@@ -3587,6 +3602,13 @@
       "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "NSoupCore/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fthJUa/Ocsr0+sTKLsKg+mnlhVJZZOau9Rqnw+saz5Jtdd0tYffVyN2BYD/z/Lr4uRCiFUjqsSVGO/IZVWhQnQ==",
+      "path": "nsoupcore/1.0.0",
+      "hashPath": "nsoupcore.1.0.0.nupkg.sha512"
     },
     "NuGet.Frameworks/4.7.0": {
       "type": "package",

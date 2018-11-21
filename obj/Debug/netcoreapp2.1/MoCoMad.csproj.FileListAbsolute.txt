@@ -62,3 +62,4 @@ C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMa
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.pdb
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.csproj.CopyComplete
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\Razor\Views\Home\Map.g.cshtml.cs
+C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
