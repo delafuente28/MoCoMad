@@ -12,21 +12,12 @@ namespace MoCoMad.Controllers
 {
     public class HomeController : Controller
     {
+        NsoupHelper _helper = new NsoupHelper();
+
         public IActionResult Index()
         {
-            string _url = "https://www.eltiempo.es/calidad-aire/madrid";
-            NsoupHelper _helper = new NsoupHelper();
-            HtmlData _data = new HtmlData();
-
-            //INPUT LICENSE PLATE
-            string _licPlate = "2265HTT";
-            Document _doc = _helper.UrlConnection(_url);
-            _data = _helper.FillHtmlData(_doc, _licPlate);
-
-            _data.LicensePlate = null;
-            _data.EnvironmentalHallmark = null;
-
-            return View(_data);
+            ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
+            return View();
         }
 
         [HttpPost]
@@ -34,8 +25,8 @@ namespace MoCoMad.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
                 string _url = "https://www.eltiempo.es/calidad-aire/madrid";
-                NsoupHelper _helper = new NsoupHelper();
                 HtmlData _data = new HtmlData();
 
                 string _licPlate = model.LicensePlate;
@@ -46,6 +37,7 @@ namespace MoCoMad.Controllers
             }
             else
             {
+                ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
                 return View();
             }
         }
@@ -67,7 +59,7 @@ namespace MoCoMad.Controllers
 
         public IActionResult Map()
         {
-            ViewData["Message"] = "Google Maps.";
+            ViewData["Message"] = "MoCoMad MAP";
 
             return View();
         }

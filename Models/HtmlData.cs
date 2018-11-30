@@ -19,6 +19,8 @@ namespace MoCoMad.Models
 
         public string EnvironmentalHallmark { get; set; }
 
+        public string PollutionStage { get; set; }
+
         [Required]
         public string LicensePlate { get; set; }
 

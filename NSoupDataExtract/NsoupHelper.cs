@@ -16,22 +16,44 @@ namespace MoCoMad.NSoupDataExtract
     {
         public Document UrlConnection(string url)
         {
-            IConnection connection = NSoupClient.Connect(url);
-            connection.Timeout(30000);
-            Document document = connection.Get();
+            try
+            {
+                IConnection connection = NSoupClient.Connect(url);
+                connection.Timeout(30000);
+                Document document = connection.Get();
+                return document;
+            }
+            catch (Exception e)
+            {
+                
+            }
 
-            return document;
+            return null;
         }
 
         public string CheckLicensePlate(string licPlate)
         {
             string _licensePlate = licPlate;
-            Document doc = UrlConnection("http://www.dgt.es/es/seguridad-vial/distintivo-ambiental/index.shtml?accion=1&matriculahd=&matricula="+ _licensePlate + "&submit=Comprobar");
+            Document doc = UrlConnection("http://www.dgt.es/es/seguridad-vial/distintivo-ambiental/index.shtml?accion=1&matriculahd=&matricula=" + _licensePlate + "&submit=Comprobar");
             string result = doc.Select("div.mensajeResultadoConImagen p").Text;
             string[] splitList = result.Split('.');
             string environmentHallmark = splitList[0];
 
             return environmentHallmark;
+        }
+
+        public string CheckPollutionProtocol()
+        {
+            string stage = null;
+            Document doc = UrlConnection("https://parclick.es/eventos/restricciones-trafico-contaminacion-madrid/");
+            Elements result = doc.Select("p[style]");
+
+            if(result[2].Text().Contains("PROTOCOLO ACTIVO:"))
+            {
+                stage = result[3].Text().Trim('[',']');
+            }
+
+            return stage;
         }
 
         public HtmlData FillHtmlData(Document doc, string _licPlate)
@@ -42,6 +64,7 @@ namespace MoCoMad.NSoupDataExtract
             data.Url = doc.BaseUri;
             data.LicensePlate = _licPlate;
             data.EnvironmentalHallmark = CheckLicensePlate(_licPlate);
+            data.PollutionStage = CheckPollutionProtocol();
 
             #region CITY NAMES
 
