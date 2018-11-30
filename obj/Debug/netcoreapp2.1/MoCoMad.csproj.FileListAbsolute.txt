@@ -30,6 +30,7 @@ C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMa
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.dll
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.pdb
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.csproj.CopyComplete
+<<<<<<< HEAD
 C:\Users\José Antonio\Desktop\MoCoMad\bin\Debug\netcoreapp2.1\MoCoMad.deps.json
 C:\Users\José Antonio\Desktop\MoCoMad\bin\Debug\netcoreapp2.1\MoCoMad.runtimeconfig.json
 C:\Users\José Antonio\Desktop\MoCoMad\bin\Debug\netcoreapp2.1\MoCoMad.runtimeconfig.dev.json
@@ -64,3 +65,6 @@ C:\Users\José Antonio\Desktop\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.dll
 C:\Users\José Antonio\Desktop\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.pdb
 C:\Users\José Antonio\Desktop\MoCoMad\obj\Debug\netcoreapp2.1\MoCoMad.csproj.CopyComplete
 C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\Razor\Views\AirQuality\Map.g.cshtml.cs
+=======
+C:\Users\delaf\OneDrive\Documentos\GitHub\MoCoMad\obj\Debug\netcoreapp2.1\Razor\Views\Home\Map.g.cshtml.cs
+>>>>>>> cf7c4a4dd55bd10d9fc39e0194da4ca807b91b43

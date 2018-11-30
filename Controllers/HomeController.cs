@@ -5,8 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MoCoMad.Models;
-using MoCoMad.NSoupDataExtract;
-using NSoup.Nodes;
 
 namespace MoCoMad.Controllers
 {
@@ -16,6 +14,7 @@ namespace MoCoMad.Controllers
 
         public IActionResult Index()
         {
+<<<<<<< HEAD
             ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
             return View();
         }
@@ -40,8 +39,10 @@ namespace MoCoMad.Controllers
                 ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
                 return View();
             }
+=======
+            return View();
+>>>>>>> cf7c4a4dd55bd10d9fc39e0194da4ca807b91b43
         }
-
 
         public IActionResult About()
         {
