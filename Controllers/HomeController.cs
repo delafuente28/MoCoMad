@@ -23,8 +23,7 @@ namespace MoCoMad.Controllers
         [HttpPost]
         public IActionResult Index(HtmlData model)
         {
-            //Doing some testing
-	    if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 ViewBag.PollutionStage = _helper.CheckPollutionProtocol();
                 string _url = "https://www.eltiempo.es/calidad-aire/madrid";

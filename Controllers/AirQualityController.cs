@@ -19,7 +19,6 @@ namespace MoCoMad.Controllers
             _data = _helper.DownloadAirQualityData();
 
             return View(_data);
-            //Probando .gitignore
         }
 
     }
