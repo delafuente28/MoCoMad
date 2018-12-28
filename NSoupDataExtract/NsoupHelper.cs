@@ -9,6 +9,7 @@ using MoCoMad.Models;
 using NSoup;
 using NSoup.Select;
 using NSoup.Nodes;
+using System.Collections.ObjectModel;
 
 namespace MoCoMad.NSoupDataExtract
 {
@@ -25,10 +26,9 @@ namespace MoCoMad.NSoupDataExtract
             }
             catch (Exception e)
             {
-                
-            }
-
-            return null;
+                var mssg = e.Message;
+                return null;
+            }                        
         }
 
         public string CheckLicensePlate(string licPlate)
@@ -42,15 +42,25 @@ namespace MoCoMad.NSoupDataExtract
             return environmentHallmark;
         }
 
-        public string CheckPollutionProtocol()
+        public ObservableCollection<string> CheckPollutionProtocol()
         {
-            string stage = null;
             Document doc = UrlConnection("https://parclick.es/eventos/restricciones-trafico-contaminacion-madrid/");
             Elements result = doc.Select("p[style]");
+            Elements result2 = doc.Select("span");
 
-            if(result[2].Text().Contains("PROTOCOLO ACTIVO:"))
+            ObservableCollection<string> stage = new ObservableCollection<string>();
+
+            foreach(var item in result2)
             {
-                stage = result[3].Text().Trim('[',']');
+                if(item.Text().Contains(": ESCENARIO"))
+                {
+                    stage.Add(item.Text());
+                }
+            }
+
+            if(stage.Count() == 0)
+            {
+                stage.Add("No hay ningún escenario activo.");
             }
 
             return stage;
@@ -58,13 +68,14 @@ namespace MoCoMad.NSoupDataExtract
 
         public HtmlData FillHtmlData(Document doc, string _licPlate)
         {
-            HtmlData data = new HtmlData();
-
-            data.Title = doc.Title;
-            data.Url = doc.BaseUri;
-            data.LicensePlate = _licPlate;
-            data.EnvironmentalHallmark = CheckLicensePlate(_licPlate);
-            data.PollutionStage = CheckPollutionProtocol();
+            HtmlData data = new HtmlData
+            {
+                Title = doc.Title,
+                Url = doc.BaseUri,
+                LicensePlate = _licPlate,
+                EnvironmentalHallmark = CheckLicensePlate(_licPlate),
+                PollutionStage = CheckPollutionProtocol()
+            };
 
             #region CITY NAMES
 

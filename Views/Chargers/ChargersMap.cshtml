@@ -1,0 +1,257 @@
+﻿@model ICollection<AirQualityData>
+    @*<!-- AirQualityData tienes que cambiarlo por tu modelo, en este caso, ChargersData -->*@
+    @{
+    ViewData["Title"] = "Chargers Map";
+    }
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+    <html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <meta name="viewport" content="width=device-width">
+        <title>Puntos de recarga de coches eléctricos en Madrid</title>
+
+        <script src="../jquery/backtop.js"></script>
+        <style type="text/css"></style>
+        
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyfjhlmU387qGML6i9yfbFBBT_f4nbgrY&callback=initMap&language=es" type="text/javascript"></script>
+        <script type="text/javascript">
+            function initialize() {
+
+                var MinZoomLevel = 12;
+                var MaxZoomLevel = 15;
+                var MyLatLng = new google.maps.LatLng(40.46, -3.70);
+                var myOptions = { zoom: MinZoomLevel, center: MyLatLng, mapTypeId: google.maps.MapTypeId.ROADMAP }
+                var directionsService = new google.maps.DirectionsService();
+                var directionsDisplay = new google.maps.DirectionsRenderer();
+                var map = new google.maps.Map(document.getElementById("MapCanvas"), myOptions);
+                directionsDisplay.setMap(map);
+                google.maps.event.addListener(map, "zoom_changed", function () {
+                    if (map.getZoom() < MinZoomLevel) map.setZoom(MinZoomLevel);
+                    if (map.getZoom() > MaxZoomLevel) map.setZoom(MaxZoomLevel);
+                });
+                var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(40.30, -3.80), new google.maps.LatLng(40.65, -3.60));
+                google.maps.event.addListener(map, "dragend", function () {
+                    if (!allowedBounds.contais(map.getCenter())) {
+                        var cs = map.getCenter();
+                        var xs = cs.lng(); var ys = cs.lat(); var xmax = allowedBounds.getNorthEast().lng();
+                        var ymax = allowedBounds.getNorthEast().lat();
+                        var xmin = allowedBounds.getSouthWest().lng();
+                        var ymin = allowedBounds.getSouthWest().lat();
+                        if (xs < xmin) { xs = xmin; }
+                        if (xs > xmax) { xs = xmax; }
+                        if (ys < ymin) { ys = ymin; }
+                        if (ys > ymax) { ys = ymax; }
+                        map.setCenter(new google.maps.LatLng(ys, xs));
+                    }
+                });
+                google.maps.event.addListener(map, "click", function () { map.setCenter(MyLatLng); map.setZoom(MinZoomLevel); });
+                var Punto = new Array(20);
+                Punto[0] = "Alfonso XII";
+                Punto[1] = "Bueso Pineda";
+                Punto[2] = "Castellana 33";
+                Punto[3] = "Castellana 52";
+                Punto[4] = "Castellana 106";
+                Punto[5] = "Castellana 160";
+                Punto[6] = "Castellana 259";
+                Punto[7] = "Castellon 105";
+                Punto[8] = "Cerro de la Plata";
+                Punto[9] = "Chulapos";
+                Punto[10] = "Fernández de los Ríos";
+                Punto[11] = "Fuencarral";
+                Punto[12] = "Génova";
+                Punto[13] = "Goya 36";
+                Punto[14] = "Goya 123";
+                Punto[15] = "Ibiza";
+                Punto[16] = "Manuel Silvela";
+                Punto[17] = "Cardenal Marcelo Spinola";
+                Punto[18] = "Lealtad";
+                Punto[19] = "Ronda de Valencia";
+
+                var Direccion = new Array(20);
+                Direccion[0] = "Dirección: Calle Alfonso XII 2";
+                Direccion[1] = "Dirección: Calle Bueso Pineda 29";
+                Direccion[2] = "Dirección: Paseo Castellana 33";
+                Direccion[3] = "Dirección: Paseo Castellana 52";
+                Direccion[4] = "Dirección: Paseo Castellana 106";
+                Direccion[5] = "Dirección: Paseo Castellana 160";
+                Direccion[6] = "Dirección: Paseo Castellana 259";
+                Direccion[7] = "Dirección: Calle Castello 105";
+                Direccion[8] = "Dirección: Calle Cerro de la Plata 4";
+                Direccion[9] = "Dirección: Calle Chulapos s/n";
+                Direccion[10] = "Dirección: Calle Fernandez de los Ríos 42";
+                Direccion[11] = "Dirección: Calle Fuencarral 114";
+                Direccion[12] = "Dirección: Calle Génova 24";
+                Direccion[13] = "Dirección: Calle Goya 36";
+                Direccion[14] = "Dirección: Calle Goya 123";
+                Direccion[15] = "Dirección: Calle Ibiza 1";
+                Direccion[16] = "Dirección: Calle Manuel Silvela 16";
+                Direccion[17] = "Dirección: Calle Cardenal Marcelo Spínola 10";
+                Direccion[18] = "Dirección: Plaza Lealtad s/n";
+                Direccion[19] = "Dirección: Ronda de Valencia 1";
+
+                var Localizacion = new Array(20);
+                Localizacion[0] = "Localización: 3&deg;41'20.3\"O 40&deg;25'09.6\"N";
+                Localizacion[1] = "Localización: 3&deg;39'19.6\"O 40&deg;27'15.5\"N";
+                Localizacion[2] = "Localización: 3&deg;41'23.3\"O 40&deg;25'57.9\"N";
+                Localizacion[3] = "Localización: 3&deg;41'18.0\"O 40&deg;26'09.7\"N";
+                Localizacion[4] = "Localización: 3&deg;41'26.2\"O 40&deg;26'44.4\"N";
+                Localizacion[5] = "Localización: 3&deg;41'19.9\"O 40&deg;27'29.2\"N";
+                Localizacion[6] = "Localización: 3&deg;41'16.9\"O 40&deg;28'34.1\"N";
+                Localizacion[7] = "Localización: 3&deg;40'50.8\"O 40&deg;26'07.3\"N";
+                Localizacion[8] = "Localización: 3&deg;40'30.9\"O 40&deg;24'01.1\"N";
+                Localizacion[9] = "Localización: 3&deg;43'17.0\"O 40&deg;24'28.5\"N";
+                Localizacion[10] = "Localización: 3&deg;42'34.4\"O 40&deg;26'08.5\"N";
+                Localizacion[11] = "Localización: 3&deg;42'08.7\"O 40&deg;25'47.0\"N";
+                Localizacion[12] = "Localización: 3&deg;41'33.3\"O 40&deg;25'33.3\"N";
+                Localizacion[13] = "Localización: 3&deg;40'51.8\"O 40&deg;25'29.7\"N";
+                Localizacion[14] = "Localización: 3&deg;40'16.4\"O 40&deg;25'29.2\"N";
+                Localizacion[15] = "Localización: 3&deg;40'42.3\"O 40&deg;25'06.9\"N";
+                Localizacion[16] = "Localización: 3&deg;41'56.7\"O 40&deg;25'50.0\"N";
+                Localizacion[17] = "Localización: 3&deg;40'11.2\"O 40&deg;28'02.3\"N";
+                Localizacion[18] = "Localización: 3&deg;41'34.6\"O 40&deg;24'57.2\"N";
+                Localizacion[19] = "Localización: 3&deg;41'58.0\"O 40&deg;24'20.5\"N";
+
+
+                function createMarker(latlng, index) {
+
+                    //Finding location
+                    var myPos
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            var myPos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                        }, function () {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        });
+                    } else {
+                        // Browser doesn't support Geolocation
+                        handleLocationError(false, infoWindow, map.getCenter());
+                    }
+
+                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+                        infoWindow.open(map);
+                    }
+
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: Punto[index]
+                    });
+
+                    var myhtml = "<html><head><title>Puntos de recarga de Madrid</title></head>";
+                    myhtml += "<body>";
+                    myhtml += "<div style=\"width:150px; height:250px;\"><center>";
+                    myhtml += "<table border=0 width=75 height=75>";
+                    myhtml += "<tr valign=top><td align=center class=google>";
+                    myhtml += "Punto de carga: " + Punto[index] + ". ";
+                    myhtml += "</td></tr>"
+                    myhtml += "<tr><td align=left class=google>";
+                    myhtml += "" + Direccion[index] + ".";
+                    myhtml += "</td></tr>"
+                    myhtml += "<tr><td align=center class=google>";
+                    myhtml += "<button type=\"button\" onclick=\"calcRoute(myPos,latlng);\">Cómo llegar</button>";
+                    myhtml += "<table border=0><tr valign=top><td align=center class=google>";
+                    myhtml += "</td></tr></table></div>";
+                    myhtml += "</body></html>";
+
+                    var window = new google.maps.InfoWindow();
+                    window.setContent(myhtml);
+                    window.setOptions({ disableAutoPan: false });
+                    google.maps.event.addListener(marker, "click", function () { window.open(map, marker); });
+                    google.maps.event.addListener(map, "click", function () { window.close(window); });
+                    google.maps.event.addListener(window, "closeclick", function () {
+                        map.setCenter(MyLatLng);
+                        map.setZoom(MinZoomLevel);
+                    });
+                }
+
+                //ESTACIONES Y MARCAS
+                var latlng = new google.maps.LatLng(40.419333, -3.688972); createMarker(latlng, 0);
+                var latlng = new google.maps.LatLng(40.454306, -3.655444); createMarker(latlng, 1);
+                var latlng = new google.maps.LatLng(40.432750, -3.689806); createMarker(latlng, 2);
+                var latlng = new google.maps.LatLng(40.436028, -3.688333); createMarker(latlng, 3);
+                var latlng = new google.maps.LatLng(40.445667, -3.690611); createMarker(latlng, 4);
+                var latlng = new google.maps.LatLng(40.458111, -3.688861); createMarker(latlng, 5);
+                var latlng = new google.maps.LatLng(40.476139, -3.688028); createMarker(latlng, 6);
+                var latlng = new google.maps.LatLng(40.435361, -3.680778); createMarker(latlng, 7);
+                var latlng = new google.maps.LatLng(40.400306, -3.675250); createMarker(latlng, 8);
+                var latlng = new google.maps.LatLng(40.407917, -3.721389); createMarker(latlng, 9);
+                var latlng = new google.maps.LatLng(40.435694, -3.709556); createMarker(latlng, 10);
+                var latlng = new google.maps.LatLng(40.429722, -3.702417); createMarker(latlng, 11);
+                var latlng = new google.maps.LatLng(40.425917, -3.692583); createMarker(latlng, 12);
+                var latlng = new google.maps.LatLng(40.424917, -3.681056); createMarker(latlng, 13);
+                var latlng = new google.maps.LatLng(40.424778, -3.671222); createMarker(latlng, 14);
+                var latlng = new google.maps.LatLng(40.418583, -3.678417); createMarker(latlng, 15);
+                var latlng = new google.maps.LatLng(40.430556, -3.699083); createMarker(latlng, 16);
+                var latlng = new google.maps.LatLng(40.467306, -3.669778); createMarker(latlng, 17);
+                var latlng = new google.maps.LatLng(40.415889, -3.692944); createMarker(latlng, 18);
+                var latlng = new google.maps.LatLng(40.405694, -3.699444); createMarker(latlng, 19);
+
+                svca = new google.maps.Polygon({
+                    strokeColor: "#802020",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1.2,
+                    fillColor: "#80A0B5",
+                    fillOpacity: 0.5
+                });
+                svca.setMap(map);
+
+                function drawRoute(map, origin, destination) {
+                    var directionsService = new google.maps.DirectionsService();
+                    var directionsDisplay = new google.maps.DirectionsRenderer();
+
+                    directionsDisplay.setMap(map);
+                    directionsService.route({
+                        origin: origin,
+                        destination: destination,
+                        // puedes escoger entre 'WALKING', 'TRANSIT' y 'BICYCLING'
+                        travelMode: 'DRIVING'
+                    }, function (response, status) {
+                        if (status === 'OK') {
+                            directionsDisplay.setDirections(response);
+                        } else {
+                            alert('No se pudo establecer el recorrido. ', status);
+                        }
+                    });
+                }
+
+                function calcRoute(start, end) {
+                    var request = {
+                        origin: start,
+                        destination: end,
+                        travelMode: DRIVING,
+                        unitSystem: UnitSystem.METRIC,
+                        provideRouteAlternatives: false,
+                        avoidFerries: true,
+                        avoidHighways: false,
+                        avoidTolls: true,
+                    }
+                    directionsService.route(request, function (result, status) {
+                        if (status == 'OK') {
+                            directionsDisplay.setDirections(result);
+                        }
+                    });
+                }
+
+            }
+        </script>
+    </head>
+
+    <body onload="initialize()" onunload="GUnload()">
+        <h2 class="text-info">PUNTOS DE RECARGA - MADRID</h2>
+        <TABLE BORDER=0>
+            <TR>
+                <TD VALIGN=TOP>
+                    <DIV ID="MapCanvas" STYLE="WIDTH: 1080px; HEIGHT: 580px;" />
+                </TD>
+            </TR>
+        </TABLE>
+    </body>
+
+</html>

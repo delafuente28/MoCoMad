@@ -25,7 +25,7 @@ namespace MoCoMad.Models
         public string Day { get; set; }
 
         public ObservableCollection<string> HourMeasure { get; set; }
-        
+
         #endregion PROPERTIES
     }
 }

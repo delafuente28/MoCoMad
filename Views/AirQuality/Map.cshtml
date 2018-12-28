@@ -229,14 +229,14 @@
                 var myhtml = "<html><head><title>Sistema de Vigilancia de la Calidad del Aire</title></head>";
                     myhtml += "<body>";
                 myhtml += "<div style=\"width:150px; height:250px;\"><center>";
-                myhtml += "<table border=0 width=75 height=150>";
-                myhtml += "<tr valign=top><td align=center class=google>";
-                myhtml += "Estación de " + Estacion[index] + ". ";
-                myhtml += "<br></td></tr>";
-                myhtml += "<tr valign=middle><td align=center class=google>Medida actual de Dióxido de Nitrogeno:";
-                myhtml += "<table border=0><tr valign=top><td align=center class=google>";
+                myhtml += "<table border=0 width=100 height=150>";
+                myhtml += "<tr><td align=center class=google><h4>";
+                myhtml += "Estación de <br>" + Estacion[index] + ". ";
+                myhtml += "</h4><br></td></tr>";
+                myhtml += "<tr><td align=center class=google>Medida actual de NO2:";
+                myhtml += "<table border=0><tr><td class=google><b>";
                 myhtml += '@ViewData["Measure4"]';
-                myhtml += "</td></tr></table></div>";
+                myhtml += "</b></td></tr></table></div>";
                 myhtml += "</body></html>";
 
                 var window = new google.maps.InfoWindow();

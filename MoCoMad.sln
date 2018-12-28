@@ -22,4 +22,12 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {968FB5C3-72D1-4E24-AA13-329532D3DAA0}
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://delafuentebrando.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MoCoMad.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
 EndGlobal
