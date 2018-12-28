@@ -22,17 +22,8 @@ namespace MoCoMad.MongoCosmosDB
 
         public MongoClient MongoDBConnection()
         {
-            //MOCOMAD1
-            //string connectionString = @"mongodb://mocomad:AcAlRDM3cPbD1UtinQ5eMEOxGsKEQVp7Zz1W7y9Luukg1fGon23OoBIJmsWWM43QwjIfCtw4RrtdwW4NR62mhg==@mocomad.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
-            //MongoClientSettings settings = MongoClientSettings.FromUrl(
-            //  new MongoUrl(connectionString)
-            //);
-            //settings.SslSettings =
-            //  new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
-            //var mongoClient = new MongoClient(settings);
-
             //MOCOMAD2
-            string connectionString = @"mongodb://mocomad2:ZEnlszRx6GDrIw1eNpnQjh9yEqYFx47PDIaKUpDjwfVw69aUrvKTvRVpgcfgVXpeHsGpo6lvybIVSazEvgpUzw==@mocomad2.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+            string connectionString = @"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
             MongoClientSettings settings = MongoClientSettings.FromUrl(
               new MongoUrl(connectionString)
             );
